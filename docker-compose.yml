@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  ai_service:
+    build: ./ai_service
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+  
+  integration_layer:
+    build: ./integration_layer
+    depends_on:
+      - ai_service
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+  
+  notification_system:
+    build: ./notification_system
+    depends_on:
+      - integration_layer
+    environment:
+      - SMTP_SERVER=${SMTP_SERVER}
+      - SMTP_USER=${SMTP_USER}
+      - SMTP_PASSWORD=${SMTP_PASSWORD}
+  
+  ui:
+    build: ./ui
+    ports:
+      - "3000:3000"
