@@ -1,0 +1,13 @@
+{
+    "name": "AI Driven Defect Management",
+    "image": "mcr.microsoft.com/vscode/devcontainers/python:3.8",
+    "postCreateCommand": "pip install -r ai_service/requirements.txt && pip install -r integration_layer/requirements.txt && pip install -r notification_system/requirements.txt && cd ui && npm install",
+    "forwardPorts": [8000, 3000],
+    "settings": {
+        "terminal.integrated.shell.linux": "/bin/bash"
+    },
+    "extensions": [
+        "ms-python.python",
+        "ms-azuretools.vscode-docker"
+    ]
+}
